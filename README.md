@@ -19,10 +19,20 @@
   - `search_documents` — 检索相关分块，返回打分排序
   - `ask_document` — 基于文档问答，返回答案与引用来源
 
+## 在线演示
+
+公网演示（Render 免费实例，首次访问可能需等待冷启动）：
+**https://rag-mcp-demo.onrender.com**
+
+打开即可对内置示例文档提问，回答附检索来源与相似度分数，无需任何 API Key。
+
 ## 快速开始
 
 ```bash
 pip install -r requirements.txt
+
+# 0. 或直接在浏览器里体验（启动时自动索引 sample_docs）
+uvicorn rag_mcp_demo.webapp:app --reload   # 打开 http://127.0.0.1:8000
 
 # 1. 导入文档（示例语料已随仓库提供）
 python -m rag_mcp_demo.cli ingest sample_docs
@@ -72,8 +82,9 @@ rag_mcp_demo/
 ├── pipeline.py      # RAG 主流程（导入、检索、问答、索引持久化）
 ├── mcp_tools.py     # MCP 工具层（与传输解耦，可单测）
 ├── server.py        # MCP stdio 服务器
+├── webapp.py        # FastAPI 单页 Web 演示（自动索引 sample_docs，内存运行）
 └── cli.py           # 命令行入口
-tests/               # 分块 / 检索 / 端到端 / 工具层 共 20 项测试
+tests/               # 分块 / 检索 / 端到端 / 工具层 / Web 共 23 项测试
 sample_docs/         # 示例语料（Agent 笔记 + MCP 简介）
 ```
 
@@ -83,7 +94,7 @@ sample_docs/         # 示例语料（Agent 笔记 + MCP 简介）
 pytest -q        # 20 passed
 ```
 
-GitHub Actions 对 Python 3.11 / 3.12 双版本跑完整测试 + CLI 冒烟（导入 → 问答）。
+GitHub Actions 对 Python 3.12 跑完整测试 + CLI 冒烟（导入 → 问答）。
 
 ## 演示说明（诚实声明）
 
