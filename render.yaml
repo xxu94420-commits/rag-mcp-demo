@@ -1,0 +1,10 @@
+# Render Blueprint: one-click deploy of the web demo.
+# Dashboard → New → Blueprint → connect this repo.
+services:
+  - type: web
+    name: rag-mcp-demo
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn rag_mcp_demo.webapp:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /
