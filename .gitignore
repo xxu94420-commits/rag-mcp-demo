@@ -1,0 +1,17 @@
+# Byte-compiled / caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+
+# Local RAG index
+.ragindex/
+
+# Virtual environments
+.venv/
+venv/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
